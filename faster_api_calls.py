@@ -5,10 +5,10 @@ import time
 
 
 def get_data_for_gameid_in_mongo(worker,apikey):
-    client = pymongo.MongoClient("mongodb://worker:password@ec2-52-24-146-167.us-west-2.compute.amazonaws.com")
+    client = pymongo.MongoClient("mongodb://worker:password@ec2-52-40-148-30.us-west-2.compute.amazonaws.com")
     db=client["lol"]
     coll=db["match_data"]
-    _ids=[x["_id"] for x in coll.find({"done":"false","batch":2})]
+    _ids=[x["_id"] for x in coll.find({"done":"false","batch":int(worker)})]
     for i,_id in enumerate(_ids):
         if i%18==0:
             time.sleep(1)
