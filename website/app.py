@@ -15,9 +15,10 @@ def calculate():
     return jsonify({"a1":a1,"a2":a2,"a3":a3,"a4":a4,"a5":a5})
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=True)
 
 @app.route("/calculate2", methods=["POST"])
 def calculate2():
     data= request.json
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080, debug=True)
