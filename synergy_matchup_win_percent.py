@@ -105,9 +105,9 @@ matchup_win_percent={}
 synergy_win_percent={}
 
 for key in total_matchup.keys():
-    matchup_win_percent[key]=wins_matchup[key]/float(total_matchup[key])
+    matchup_win_percent[key]=(wins_matchup[key]/float(total_matchup[key]),total_matchup[key])
 for key in total_synergy.keys():
-    synergy_win_percent[key]=wins_synergy[key]/float(total_synergy[key])
+    synergy_win_percent[key]=(wins_synergy[key]/float(total_synergy[key]),total_synergy[key])
 
-pickle.dump( matchup_win_percent, open( "matchup_win_percent.p", "wb" ) )
-pickle.dump( synergy_win_percent, open( "synergy_win_percent.p", "wb" ) )
+pickle.dump( matchup_win_percent, open( "matchup_win_percent2.p", "wb" ) )
+pickle.dump( synergy_win_percent, open( "synergy_win_percent2.p", "wb" ) )
