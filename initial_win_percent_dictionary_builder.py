@@ -40,7 +40,9 @@ def build_initial_winrate_dict(iterable_mongo):
                 champ_wins[champ]+=1
     for x in champ_wins.keys():
         win_percent[x]=champ_wins[x]/float(champ_plays[x])
-    return win_percent
+    return win_percent,champ_plays,champ_wins
 
-flat_win_percent=build_initial_winrate_dict(coll.find())
+flat_win_percent, champ_plays, champ_wins = build_initial_winrate_dict(coll.find())
 pickle.dump( flat_win_percent , open( "flat_win_percent.p", "wb" ) )
+pickle.dump( champ_plays , open( "champ_plays.p", "wb" ) )
+pickle.dump( champ_wins , open( "champ_wins.p", "wb" ) )
