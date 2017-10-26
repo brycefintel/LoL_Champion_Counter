@@ -40,16 +40,18 @@
     e3 = $("#enemy3").val()
     e4 = $("#enemy4").val()
     e5 = $("#enemy5").val()
+    el1 = $("#enemy_laner1").val()
+    el2 = $("#enemy_laner2").val()
 
-    pick_dict = {a1 : a1, a2 : a2, a3 : a3, a4 : a4, a5 : a5, e1 : e1, e2 : e2, e3 : e3, e4 : e4, e5 : e5}
+
+    pick_dict = {a1 : a1, a2 : a2, a3 : a3, a4 : a4, a5 : a5, e1 : e1, e2 : e2, e3 : e3, e4 : e4, e5 : e5, el1 : el1, el2 : el2}
 
     $.post({
       url: "/calculate",
     contentType: "application/json",
     data: JSON.stringify(pick_dict),
     success: function(result){
-      $(".hidden").css("display","inline").html("ChampionID one: " + result.a1 + " ChampionID two:  " + result.a2
-      + " ChampionID three: " + result.a3 + " ChampionID four:  " + result.a4 + " ChampionID five:  " + result.a5);
+      $(".hidden").css("display","inline").html("ChampionID one: " + result.predictions);
     }
     });
   }
@@ -163,9 +165,9 @@
             <i class="fa fa-4x fa-exchange text-primary sr-icons"></i>
             <h3>Who's your enemy laner?</h3>
             <p class="text-muted">
-              <input type="text" placeholder="Enemy Laner" id="laner">
+              <input type="int" placeholder="Enemy Laner" id="enemy_laner1">
               <br /><br />
-              <input type="int" placeholder="2nd Enemy Laner" id="laner2">
+              <input type="int" placeholder="2nd Enemy Laner" id="enemy_laner2">
               <label for="enemy1" style="color: black">Only if you're bot lane</label>
             </p>
           </div>
