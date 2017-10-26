@@ -51,7 +51,8 @@
     contentType: "application/json",
     data: JSON.stringify(pick_dict),
     success: function(result){
-      $(".hidden").css("display","inline").html("ChampionID one: " + result.predictions);
+      $(".hidden").css("display","inline").html("Your Best Picks are:" +
+      "<br/>" + "<br/>" + result.predictions);
     }
     });
   }
@@ -129,13 +130,13 @@
             <i class="fa fa-4x fa-users text-primary sr-icons"></i>
             <h3>Allied Picks</h3>
             <p class="text-muted">
-              <input type="int" placeholder="Ally 1" id="ally1">
+              <input type="int" placeholder="Ally 1" id="ally1" class="champinput">
               <label for="ally1"></label>
-              <input type="int" placeholder="Ally 2" id="ally2">
+              <input type="int" placeholder="Ally 2" id="ally2" class="champinput">
               <label for="ally2"></label>
-              <input type="int" placeholder="Ally 3" id="ally3">
+              <input type="int" placeholder="Ally 3" id="ally3" class="champinput">
               <label for="ally3"></label>
-              <input type="int" placeholder="Ally 4" id="ally4">
+              <input type="int" placeholder="Ally 4" id="ally4" class="champinput">
               <label for="ally4"></label>
 
             </p>
@@ -146,15 +147,15 @@
             <i class="fa fa-4x fa-times text-primary sr-icons"></i>
             <h3>Enemy Picks</h3>
             <p class="text-muted">
-              <input type="int" placeholder="Enemy 1" id="enemy1">
+              <input type="int" placeholder="Enemy 1" id="enemy1" class="champinput">
               <label for="enemy1"></label>
-              <input type="int" placeholder="Enemy 2" id="enemy2">
+              <input type="int" placeholder="Enemy 2" id="enemy2" class="champinput">
               <label for="enemy2"></label>
-              <input type="int" placeholder="Enemy 3" id="enemy3">
+              <input type="int" placeholder="Enemy 3" id="enemy3" class="champinput">
               <label for="enemy3"></label>
-              <input type="int" placeholder="Enemy 4" id="enemy4">
+              <input type="int" placeholder="Enemy 4" id="enemy4" class="champinput">
               <label for="enemy4"></label>
-              <input type="int" placeholder="Enemy 5" id="enemy5">
+              <input type="int" placeholder="Enemy 5" id="enemy5" class="champinput">
               <label for="enemy5"></label>
 
             </p>
@@ -165,9 +166,9 @@
             <i class="fa fa-4x fa-exchange text-primary sr-icons"></i>
             <h3>Who's your enemy laner?</h3>
             <p class="text-muted">
-              <input type="int" placeholder="Enemy Laner" id="enemy_laner1">
+              <input type="int" placeholder="Enemy Laner" id="enemy_laner1" class="champinput">
               <br /><br />
-              <input type="int" placeholder="2nd Enemy Laner" id="enemy_laner2">
+              <input type="int" placeholder="2nd Enemy Laner" id="enemy_laner2" class="champinput">
               <label for="enemy1" style="color: black">Only if you're bot lane</label>
             </p>
           </div>
@@ -274,6 +275,174 @@
         <button onclick="calculate();">Calculate</button>
 
         <p><span class="hidden"></span></p>
+
+</body>
+</html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Autocomplete - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    var availableTags = [
+      "evelynn",
+      "zed",
+      "nunu",
+      "swain",
+      "taric",
+      "skarner",
+      "ekko",
+      "nasus",
+      "graves",
+      "jax",
+      "shaco",
+      "morgana",
+      "aatrox",
+      "xayah",
+      "nidalee",
+      "kassadin",
+      "sona",
+      "reksai",
+      "cassiopeia",
+      "taliyah",
+      "malzahar",
+      "amumu",
+      "khazix",
+      "olaf",
+      "irelia",
+      "riven",
+      "nami",
+      "jhin",
+      "kogmaw",
+      "gangplank",
+      "syndra",
+      "poppy",
+      "volibear",
+      "kennen",
+      "ryze",
+      "gragas",
+      "garen",
+      "diana",
+      "karthus",
+      "jayce",
+      "bard",
+      "sion",
+      "elise",
+      "alistar",
+      "vayne",
+      "tahmkench",
+      "ezreal",
+      "mordekaiser",
+      "lux",
+      "fiora",
+      "kalista",
+      "twistedfate",
+      "kled",
+      "kindred",
+      "illaoi",
+      "darius",
+      "drmundo",
+      "tryndamere",
+      "hecarim",
+      "lissandra",
+      "anivia",
+      "yorick",
+      "nocturne",
+      "jarvaniv",
+      "ashe",
+      "malphite",
+      "aurelionsol",
+      "annie",
+      "twitch",
+      "yasuo",
+      "kayle",
+      "janna",
+      "blitzcrank",
+      "zac",
+      "talon",
+      "sivir",
+      "quinn",
+      "heimerdinger",
+      "leblanc",
+      "xinzhao",
+      "katarina",
+      "chogath",
+      "shen",
+      "ivern",
+      "jinx",
+      "caitlyn",
+      "missfortune",
+      "renekton",
+      "viktor",
+      "brand",
+      "warwick",
+      "corki",
+      "braum",
+      "maokai",
+      "draven",
+      "ornn",
+      "thresh",
+      "urgot",
+      "tristana",
+      "galio",
+      "vladimir",
+      "orianna",
+      "masteryi",
+      "soraka",
+      "varus",
+      "fizz",
+      "veigar",
+      "rengar",
+      "nautilus",
+      "vi",
+      "lulu",
+      "pantheon",
+      "trundle",
+      "ahri",
+      "kayn",
+      "shyvana",
+      "leesin",
+      "udyr",
+      "camille",
+      "lucian",
+      "zyra",
+      "fiddlesticks",
+      "zilean",
+      "rakan",
+      "rammus",
+      "rumble",
+      "gnar",
+      "wukong",
+      "sejuani",
+      "xerath",
+      "ziggs",
+      "velkoz",
+      "singed",
+      "karma",
+      "akali",
+      "leona",
+      "azir",
+      "teemo"
+    ];
+    $( ".champinput" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  </script>
+</head>
+<body>
+
+<div class="ui-widget">
+  <label for="tags">Tags: </label>
+  <input id="tags">
+</div>
+
 
 </body>
 </html>

@@ -5,6 +5,7 @@ from collections import Counter
 from scipy.special import logit, expit
 
 app = Flask(__name__)
+reverse_champ_dict = pickle.load(open("/home/bryce/galvanize/class/capstone/picklejar/reverse_champ_dict.p","rb"))
 
 class recommender(object):
     def __init__(self,a1=None,a2=None,a3=None,a4=None,a5=None,
@@ -12,10 +13,12 @@ class recommender(object):
                  enemy_laner1=None,enemy_laner2=None):
         #self.a1=a1, self.a2=a2, self.a3=a3, self.a4=a4, self.a5=a5
         #self.e1=e1, self.e2=e2, self.e3=e3, self.e4=e4, self.e5=e5
-        self.enemy_laners=[champid for champid in [enemy_laner1,enemy_laner2] if (champid != None and champid != '')]
-        #self.enemy_laners=[int(champid) for champid in self.enemy_laners]
-        self.allies=[champid for champid in [a1,a2,a3,a4,a5] if champid != None]
-        self.enemies=[champid for champid in [e1,e2,e3,e4,e5] if champid != None]
+        self.enemy_laners=[champid for champid in [enemy_laner1,enemy_laner2]
+                                    if champid != None]
+        self.allies=[champid for champid in [a1,a2,a3,a4,a5]
+                                    if champid != None]
+        self.enemies=[champid for champid in [e1,e2,e3,e4,e5]
+                                    if champid != None]
         pickle_path="/home/bryce/galvanize/class/capstone/"
         self.champion_dict = pickle.load(open(pickle_path+"picklejar/champion_dict.p","rb"))
         self.matchup_win_percent = pickle.load(open(pickle_path+"picklejar/trimmed_matchup.p","rb"))
@@ -32,7 +35,6 @@ class recommender(object):
 
 ###START
     def get_winrate_for_enemy(self,possible_pick,enemyid):
-        #print self.enemies
         return self.matchup_win_percent[possible_pick,enemyid]
     def get_winrate_for_ally(self,possible_pick,allyid):
         return self.synergy_win_percent[possible_pick,allyid]
@@ -44,26 +46,37 @@ class recommender(object):
         self.update_events+=1
         for champion in self.predicted_winrates.keys():
             if champion == picked_champion:
-                pass
+                self.predicted_winrates[champion] -= 2
             else:
-                self.predicted_winrates[champion] = self.predicted_winrates[champion] + logit(self.get_winrate_for_enemy(champion,picked_champion))
+                self.predicted_winrates[champion] = (
+                    self.predicted_winrates[champion] +
+                    logit(self.get_winrate_for_enemy(champion,picked_champion)[0]))
 
     def update_predicted_winrate_for_ally(self,picked_champion):
         self.update_events+=1
         for champion in self.predicted_winrates.keys():
             if champion == picked_champion:
-                pass
+                self.predicted_winrates[champion] -= 2
             else:
-                self.predicted_winrates[champion] = self.predicted_winrates[champion] + logit(self.get_winrate_for_ally(champion,picked_champion))
+                self.predicted_winrates[champion] = (
+                    self.predicted_winrates[champion] +
+                    logit(self.get_winrate_for_ally(champion,picked_champion)[0]))
 
     def update_predicted_winrate_for_lane(self, picked_champion):
         self.update_events+=1
         for champion in self.predicted_winrates.keys():
-            self.predicted_winrates[champion] = self.predicted_winrates[champion] + logit(self.get_winrate_for_enemy_laner(champion,picked_champion))
+            if champion == picked_champion:
+                self.predicted_winrates[champion] -= 2
+            else:
+                self.predicted_winrates[champion] = (
+                    self.predicted_winrates[champion] +
+                    logit(self.get_winrate_for_enemy_laner(champion,picked_champion)[0]))
+
 ###END
 
     def top_picks(self):
-        return sorted(self.predicted_winrates.items(), key=lambda(item): item[1][0], reverse=True)
+
+        return sorted(self.predicted_winrates.items(), key=lambda(item): item[1], reverse=True)
 
     def champion_name_from_id(self,champion_number):
         return self.champion_dict["data"][str(champion_number)]["name"]
@@ -71,7 +84,7 @@ class recommender(object):
     def predict(self,n=5):
         top_n_picks=[]
         for pair in self.top_picks()[:n]:
-            top_n_picks.append((self.champion_name_from_id(pair[0]), "%.2f" % expit(pair[1][0]/(self.update_events+1))))
+            top_n_picks.append((self.champion_name_from_id(pair[0]), "%.2f" % expit(pair[1]/(self.update_events+1))))
         return top_n_picks
 
 def run_and_predict(a1=None,a2=None,a3=None,a4=None,a5=None,
@@ -96,23 +109,38 @@ def index():
 @app.route("/calculate", methods=["POST"])
 def calculate():
     data = request.json
-    print data
-    for key in data.keys():
-        try:
-            data[key]=int(data[key])
-        except:
-            data[key]=None
-    print data
+    print "calculating"
+
+    for key in data:
+        if data[key] == '':
+            data[key] = None
+    for key in data:
+        if data[key] == None:
+            pass
+        else:
+            data[key]=reverse_champ_dict[data[key]]
+
+    # for key in data.keys():
+    #     try:
+    #         data[key]=int(data[key])
+    #     except:
+    #         data[key]=None
+
 
     predictions = run_and_predict(a1=data["a1"],a2=data["a2"],a3=data["a3"],a4=data["a4"],
                     e1=data["e1"],e2=data["e2"],e3=data["e3"],e4=data["e4"],e5=data["e5"],
                     enemy_laner1=data["el1"],enemy_laner2=data["el2"])
+
+    html=""
+    for line in predictions:
+        html+=line[0]+"&nbsp"*(15-len(line[0]))+line[1]+"<br/>"
+
     #post_string=""
     #for x in predictions:
     #    post_string.append(str(x))
     # a1,a2,a3,a4,a5 = data["a1"], data["a2"], data["a3"], data["a4"], data["a5"]
     # e1,e2,e3,e4,e5 = data["e1"], data["e2"], data["e3"], data["e4"], data["e5"]
-    return jsonify({"predictions":str(predictions)})
+    return jsonify({"predictions":html})
 
 
 
