@@ -46,6 +46,9 @@ p {
 .bg-grey {
   background-color: #999ea2 !important; }
 
+.bg-slate {
+  background-color: #bbc3cc !important; }
+
 .bg-dark {
   color: white;
   background-color: #222222 !important; }
