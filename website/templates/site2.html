@@ -72,7 +72,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">LoLCounter.io</a>
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">LoLCounter.us</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -88,7 +88,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">empty section</a>
+            <a class="nav-link js-scroll-trigger" href="#about">Contact</a>
           </li>
         </ul>
       </div>
@@ -188,33 +188,54 @@
   </section>
 
 
-  <section class="p-0" id="portfolio">
+  <section class="bg-slate" id="portfolio">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto text-center">
-          <h2 class="section-heading">How it works</h2>
+          <h2 class="section-heading"><br />How it works</h2>
           <hr class="light">
-    {% for equation in equations %}
-    <p>{{ equation.equation }}'s roots are {{ equation.root_1|float|round }} and {{ (equation.root_2)|float|round(1) }}</p>
-    {% endfor %}
+
+    <p>
+       lolcounter.us is built using a probabalistic model that analyzes the winrates
+       of various champion matchups to suggest the champion pick that will maximize
+       your chance of winning your game.  <br /><br />
+       There are currently 138 league of legends champions, each with their unique strengths
+       and weaknesses.  lolcounter.us takes into account not just the strength of each individual champion
+       pick, but also the viabillity of each champion in conjunction with each of your allied
+       champions.  Similarly, each champion you could pick is compared to each enemy pick, with
+       special emphasis placed on your enemy laner. <br /><br />
+       Counterpicking is a key part of league of legends meta game strategy, and is neccesary
+       in maximizing your chances at victory.  lolchampion.us seeks to quantify these matchup strengths,
+       and helps you make champion pick decisions not on vague feelings but on the actual data recorded
+       from hundreds of thousands of games.  <br /><br />
+       See you on the rift.   <br /><br />
+
+    </p>
+
         </div>
       </div>
     </div>
   </section>
 
-
-  <section class="bg-primary" id="about">
+  <section class="bg-slate" id="about">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto text-center">
-          <h2 class="section-heading text-white">Discard Section</h2>
+          <h2 class="section-heading"></h2>
           <hr class="light">
-          <p class="text-faded"> content</p>
-          <a class="btn btn-default btn-xl js-scroll-trigger" href="#services">Get Solving!</a>
+
+    <p>
+      <img src="https://s3.amazonaws.com/battlefy-user-generated-assets/users/559e1ef56a27d84300d67094/5707292bf993038512cefc7d.jpg" alt="Victory" align="middle">
+      <br/>
+      lolcounterus@gmail.com <br/>
+      <a href="https://github.com/brycefintel/LoL_Champion_Counter">Project GitHub</a>
+    </p>
+
         </div>
       </div>
     </div>
   </section>
+
 
   <!-- Bootstrap core JavaScript -->
   <script src="static/vendor/jquery/jquery.min.js"></script>
@@ -230,51 +251,6 @@
   <script src="static/js/creative.min.js"></script>
 
 
-
-    <h1>League of Legends team-based counter pick recommender</h1>
-    <p>Description here</p>
-    <p>More info here</p>
-        <h3>Enter your allied champions</h3>
-        <p>
-      	<input type="int" placeholder="Ally 1" id="ally1">
-      	<label for="ally1">Top</label>
-        <input type="int" placeholder="Enemy 1" id="enemy1">
-        <label for="enemy1">Top</label>
-      </p>
-
-      	<input type="int" placeholder="Ally 2" id="ally2">
-      	<label for="ally2">Jungle</label>
-
-      	<input type="int" placeholder="Ally 3" id="ally3">
-      	<label for="ally3">Mid</label>
-
-        <input type="int" placeholder="Ally 4" id="ally4">
-        <label for="ally4">Support</label>
-
-        <input type="int" placeholder="Ally 5" id="ally5">
-        <label for="ally5">Adc</label>
-
-        <h3>Enter your enemy champions</h3>
-        <input type="int" placeholder="Enemy 1" id="enemy1">
-        <label for="enemy1">Top</label>
-
-        <input type="int" placeholder="Enemy 2" id="enemy2">
-        <label for="enemy2">Jungle</label>
-
-        <input type="int" placeholder="Enemy 3" id="enemy3">
-        <label for="enemy3">Mid</label>
-
-        <input type="int" placeholder="Enemy 4" id="enemy4">
-        <label for="enemy4">Support</label>
-
-        <input type="int" placeholder="Enemy 5" id="enemy5">
-        <label for="enemy5">Adc</label>
-
-
-
-        <button onclick="calculate();">Calculate</button>
-
-        <p><span class="hidden"></span></p>
 
 </body>
 </html>
@@ -438,10 +414,7 @@
 </head>
 <body>
 
-<div class="ui-widget">
-  <label for="tags">Tags: </label>
-  <input id="tags">
-</div>
+
 
 
 </body>
