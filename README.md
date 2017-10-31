@@ -27,15 +27,18 @@ Lane Matchup:
 My model runs as a class object which takes the state of a League of Legends draft as input.  On instantiation a list of  victory probabillites for each champion is created.  For every champion decision passed to the model, the model queries the appropriate victory probabillity resource and updates the projected win rate of each champion available to be picked.
 
 
-A quantitative approach:
+### A quantitative approach:
 There exist sites that rank the counter-pick options that perform well against each champion.  These recommendations are determined by users voting, and are not updated with each patch.  I would like to base my recommendations purely on demonstrated game data.  Sites exist which do something similar, and are great tools for understanding the interplay between various champions.  I would like to take it a step further and create a more “in the moment” tool which tells you what to play given the current situation rather than simply educating the user.
 
 By tailoring the recommender to each match, I am able to draw out the synergistic impact of friendly team compositions on win percentage as well as interact with the whole of the enemy team instead of just the laning opponent.
 
 
-Data:
+### Data:
 Riot Games API.  Riot makes match data for all relevant games played freely available through their API.
 
 
-Next steps:
+### Next steps:
 I need to obtain a Riot API production key in order to acquire larger numbers of games in a timely fashion.  My production pipeline is set up to run on any number of entries in my MongoDB server.  With faster API access I would like to re-collect my dataset from the new patch with the release of each patch.  This would allow LoLCounter.us to provide more accurate timely results, as well as give insight into the ever evolving champion meta.
+
+### About me:
+I am a data scientist in Seattle Washington coding in Python.  I undertook this project in order to get at the numbers behind the complex strategy decisions that go into counter picking in League, and to practice deploying a MongoDB sever and using it to make and store API calls.  Any questions about the project, feel free to contact me at lolcounterus@gmail.com.
