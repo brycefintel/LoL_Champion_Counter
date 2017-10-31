@@ -1,6 +1,6 @@
 LoLCounter.us
 
-What it is:
+##What it is:
 Website that suggests which League of Legends champion you should play based on revealed enemy and friendly champions chosen in the pre-game lobby.
 League of Legends has 138 unique champions, each with unique strengths and weaknesses.
 Picking a champion that works well with allies strengths and exploits enemy weaknesses is a vital part of a successful strategy.
