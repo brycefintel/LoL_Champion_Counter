@@ -1,22 +1,25 @@
-LoLCounter.us
+# LoLCounter.us
 
-##What it is:
+### What it is:
 Website that suggests which League of Legends champion you should play based on revealed enemy and friendly champions chosen in the pre-game lobby.
 League of Legends has 138 unique champions, each with unique strengths and weaknesses.
 Picking a champion that works well with allies strengths and exploits enemy weaknesses is a vital part of a successful strategy.
 LoLCounter.us helps you make this choice based on data drawn from past matches.
 
-Methodology:
+### Methodology:
 Starting with 1,000 seed gameIDs, I used the Riot Games v3 API to get playerlists for each of these games.  Using these 10,000 playerIDs, I collected the gameIDs for the most recent 20 games played by each player.  I then used this list of gameIDs to download ~200,000 game data objects onto a MongoDB server I set up.
 
 Parsing the game data for team champion composition, lane information, and victory flags, I was able to create a series of victory probabilities for every champion matchup.
 I calculated the directional win rates for each champion in conjunction with each other champion in three different situations:
+
 Allied:
-		% X wins with Y on team
+    % X wins with Y on team
+    
 Adversarial:
-		% X wins with Y on enemy team
+    % X wins with Y on enemy team
+    
 Lane Matchup:
-		% X wins when Y is enemy laner 
+    % X wins when Y is enemy laner 
 
 My model runs as a class object which takes the state of a League of Legends draft as input.  On instantiation a list of  victory probabillites for each champion is created.  For every champion decision passed to the model, the model queries the appropriate victory probabillity resource and updates the projected win rate of each champion available to be picked.
 
