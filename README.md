@@ -13,13 +13,13 @@ Parsing the game data for team champion composition, lane information, and victo
 I calculated the directional win rates for each champion in conjunction with each other champion in three different situations:
 
 Allied:
-    % X wins with Y on team
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;% X wins with Y on team
     
 Adversarial:
-    % X wins with Y on enemy team
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;% X wins with Y on enemy team
     
 Lane Matchup:
-    % X wins when Y is enemy laner 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;% X wins when Y is enemy laner 
 
 My model runs as a class object which takes the state of a League of Legends draft as input.  On instantiation a list of  victory probabillites for each champion is created.  For every champion decision passed to the model, the model queries the appropriate victory probabillity resource and updates the projected win rate of each champion available to be picked.
 
